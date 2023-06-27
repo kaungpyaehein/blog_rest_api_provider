@@ -1,4 +1,4 @@
-import '../data/model/get_all_posts_response.dart';
+import '../../data/model/get_all_posts_response.dart';
 
 abstract class GetAllPostState { }
 
