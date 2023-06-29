@@ -6,7 +6,6 @@ import 'package:blog_rest_api_provider/provider/upload_post/upload_ui_state.dart
 import 'package:flutter/widgets.dart';
 import 'package:dio/src/form_data.dart';
 
-
 class BlogUploadNotifier extends ChangeNotifier {
   UploadUIState uploadUIState = UploadUILoading(0);
   final BlogApiService _blogApiService = BlogApiService();
@@ -18,7 +17,13 @@ class BlogUploadNotifier extends ChangeNotifier {
     try {
       uploadUIState = UploadUILoading(0);
       BlogUploadResponse blogUploadResponse = await _blogApiService.uploadPost(
-          title: title, body: body, data: data);
+          title: title,
+          body: body,
+          data: data,
+          sendProgress: (int send, int size) {
+            int progress = ((send/size) *100).toInt();
+            uploadUIState = UploadUILoading(progress);
+          });
       uploadUIState = UploadUISuccess(blogUploadResponse);
     } catch (e) {
       uploadUIState = UploadUIFailed("Something went wrong");
