@@ -35,6 +35,7 @@ class _HomeState extends State<Home> {
                 getAllPostState.getAllPostList;
             return RefreshIndicator(
               onRefresh: () {
+                _getAllPost(context);
               return Future.delayed(const Duration(seconds: 1));
               },
               child: ListView.builder(
