@@ -16,6 +16,19 @@ class GetCompletePostNotifier extends ChangeNotifier {
       notifyListeners();
     } catch (e) {
       getCompletePostState = GetCompletePostFailed("Something went wrong");
+      notifyListeners();
+    }
+  }
+  void deletePost({required int id})  async {
+    getCompletePostState =GetCompletePostLoading();
+    notifyListeners();
+    try {
+     await _blogApiService.deletePost(id: id);
+    }
+    catch (e) {
+
     }
   }
 }
+
+
